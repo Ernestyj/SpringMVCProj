@@ -1,5 +1,7 @@
 package com.eugene.config;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -7,7 +9,12 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
 /**
  * Created by DCLab on 11/19/2015.
@@ -15,14 +22,42 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @EnableWebMvc   //Enable Spring MVC
 @ComponentScan("com.eugene")    //Enable component-scanning
-public class WebServletConfig extends WebMvcConfigurerAdapter {
+public class WebServletConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
 
-    @Bean   //configure a JSP view resolver
+    private ApplicationContext applicationContext;
+
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
+
+//    @Bean   //configure a JSP view resolver
+//    public ViewResolver viewResolver() {
+//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//        resolver.setPrefix("/WEB-INF/pages/");
+//        resolver.setSuffix(".jsp");
+//        // ensure that JSTL¡¯s formatting and message tags will get the Locale
+//        // and message sources configured in Spring
+//        resolver.setViewClass(JstlView.class);
+//        resolver.setExposeContextBeansAsAttributes(true);
+//        return resolver;
+//    }
+    @Bean   //configure a Thymeleaf view resolver
     public ViewResolver viewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/pages/");
-        resolver.setSuffix(".jsp");
-        resolver.setExposeContextBeansAsAttributes(true);
+        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+        resolver.setTemplateEngine(templateEngine());
+        resolver.setCharacterEncoding("UTF-8");
+        return resolver;
+    }
+    private TemplateEngine templateEngine() {
+        SpringTemplateEngine engine = new SpringTemplateEngine();
+        engine.setTemplateResolver(templateResolver());
+        return engine;
+    }
+    private ITemplateResolver templateResolver() {
+        SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
+        resolver.setApplicationContext(applicationContext);
+        resolver.setPrefix("/WEB-INF/templates/");
+        resolver.setTemplateMode(TemplateMode.HTML);
         return resolver;
     }
 

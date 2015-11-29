@@ -9,7 +9,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title></title>
+    <title>Spittles</title>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/style.css" />" >
 </head>
 <body>
 <h2>Recent spittles</h2>
