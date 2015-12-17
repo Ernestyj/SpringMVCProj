@@ -1,4 +1,4 @@
-package com.eugene;
+package com.eugene.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
