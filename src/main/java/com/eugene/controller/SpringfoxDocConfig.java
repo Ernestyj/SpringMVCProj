@@ -1,6 +1,7 @@
 package com.eugene.controller;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Sets;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -34,8 +35,9 @@ public class SpringfoxDocConfig {
     @Bean
     public Docket petApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("full-petstore-api")
+                .groupName("full-petstore")
                 .apiInfo(apiInfo())
+                .forCodeGeneration(true)
                 .select()
                 .paths(petstorePaths())
                 .build();
@@ -49,24 +51,16 @@ public class SpringfoxDocConfig {
     }
 
     @Bean
-    public Docket categoryApi() {
+    public Docket adminApi(){
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("category-api")
+                .groupName("admins")
                 .apiInfo(apiInfo())
+                .forCodeGeneration(true)
                 .select()
-                .paths(regex("/category.*"))
+                .paths(regex("/admins.*"))
                 .build();
     }
 
-    @Bean
-    public Docket multipartApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("multipart-api")
-                .apiInfo(apiInfo())
-                .select()
-                .paths(regex("/upload.*"))
-                .build();
-    }
 
     @Bean
     public Docket userApi() {
@@ -85,13 +79,12 @@ public class SpringfoxDocConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .securitySchemes(newArrayList(new BasicAuth("test")))
                 .securityContexts(securityContexts)
-                .groupName("user-api")
+                .groupName("user")
                 .apiInfo(apiInfo())
                 .select()
                 .paths(userOnlyEndpoints())
                 .build();
     }
-
     private Predicate<String> userOnlyEndpoints() {
         return new Predicate<String>() {
             @Override
@@ -110,6 +103,29 @@ public class SpringfoxDocConfig {
                 .license("Apache License Version 2.0")
                 .licenseUrl("https://github.com/springfox/springfox/blob/master/LICENSE")
                 .version("2.0")
+                .build();
+    }
+
+    @Bean
+    public Docket configSpringfoxDocket_all() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .produces(Sets.newHashSet("application/json"))
+                .consumes(Sets.newHashSet("application/json"))
+                .protocols(Sets.newHashSet("http", "https"))
+                .forCodeGeneration(true)
+                .select().paths(regex(".*"))
+                .build();
+    }
+
+    @Bean
+    public Docket configSpringfoxDocket_foo() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("foo")
+                .produces(Sets.newHashSet("application/json"))
+                .consumes(Sets.newHashSet("application/json"))
+                .protocols(Sets.newHashSet("http", "https"))
+                .forCodeGeneration(true)
+                .select().paths(regex(".*foo.*"))
                 .build();
     }
 

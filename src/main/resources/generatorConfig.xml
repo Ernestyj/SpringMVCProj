@@ -39,11 +39,11 @@
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
         <!--对应数据库表 mysql可以加入主键自增 字段命名 忽略某字段等-->
-        <table schema="MetaManager" tableName="citizen_resident" domainObjectName="CitizenResident"
+        <table schema="MetaManager" tableName="admin" domainObjectName="Admin"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
-            <!--<property name="useActualColumnNames" value="true"/>-->
+            <property name="useActualColumnNames" value="true"/>
             <!--<generatedKey column="ID" sqlStatement="DB2" identity="true" />-->
             <!--<columnOverride column="DATE_FIELD" property="startDate" />-->
             <!--<ignoreColumn column="FRED" />-->

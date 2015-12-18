@@ -11,26 +11,26 @@
 // */
 //public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 //
-//    @Override   //ÅäÖÃrootÉÏÏÂÎÄ,ÈçJpaÊı¾İÔ´µÈµÈµÄÅäÖÃ
+//    @Override   //é…ç½®rootä¸Šä¸‹æ–‡,å¦‚Jpaæ•°æ®æºç­‰ç­‰çš„é…ç½®
 //    protected Class<?>[] getRootConfigClasses() {
 ////        return new Class<?>[] {ApplicationConfig.class, JpaConfig.class, SecurityConfig.class};
 //        return new Class<?>[] {ApplicationConfig.class};
 //    }
 //
-//    @Override   //ÅäÖÃdispatcher servlet£¬Èç¹ûÔÚroot configÖ¸¶¨ÁË¸Ã×ª·¢¹æÔò¾Í¿ÉÒÔºöÂÔ
+//    @Override   //é…ç½®dispatcher servletï¼Œå¦‚æœåœ¨root configæŒ‡å®šäº†è¯¥è½¬å‘è§„åˆ™å°±å¯ä»¥å¿½ç•¥
 //    protected Class<?>[] getServletConfigClasses() {
 //        return new Class<?>[] {WebMvcConfig.class};
 //    }
 //
-//    @Override   //Ö¸¶¨¿ªÊ¼±»servlet´¦ÀíµÄurl,ÅäÖÃ´Ó/¿ªÊ¼
+//    @Override   //æŒ‡å®šå¼€å§‹è¢«servletå¤„ç†çš„url,é…ç½®ä»/å¼€å§‹
 //    protected String[] getServletMappings() {
 //        return new String[]{"/"};
 //    }
 //
-//    //ÅäÖÃservlet¹ıÂËÆ÷
+//    //é…ç½®servletè¿‡æ»¤å™¨
 //    @Override
 //    protected Filter[] getServletFilters() {
-//        //±àÂë
+//        //ç¼–ç 
 //        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
 //        characterEncodingFilter.setEncoding("UTF-8");
 //        characterEncodingFilter.setForceEncoding(true);
