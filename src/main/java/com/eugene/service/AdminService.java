@@ -10,5 +10,12 @@ import java.util.List;
 public interface AdminService {
 
     List<Admin> getAdmins();
+    Admin getAdminById(Integer id);
+    Admin getAdminByAccount(String name);
 
+    int updateAdminByIdSelective(Admin admin);
+
+    int deleteAdminById(Integer id);
+
+    int insertAdminSelective(Admin admin);
 }

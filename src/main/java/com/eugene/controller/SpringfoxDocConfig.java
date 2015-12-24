@@ -1,5 +1,6 @@
 package com.eugene.controller;
 
+import com.eugene.common.Constants;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
 import org.springframework.context.annotation.Bean;
@@ -57,7 +58,7 @@ public class SpringfoxDocConfig {
                 .apiInfo(apiInfo())
                 .forCodeGeneration(true)
                 .select()
-                .paths(regex("/admins.*"))
+                .paths(regex(Constants.URI_API_BASE + "/admins.*"))
                 .build();
     }
 
@@ -116,18 +117,5 @@ public class SpringfoxDocConfig {
                 .select().paths(regex(".*"))
                 .build();
     }
-
-    @Bean
-    public Docket configSpringfoxDocket_foo() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("foo")
-                .produces(Sets.newHashSet("application/json"))
-                .consumes(Sets.newHashSet("application/json"))
-                .protocols(Sets.newHashSet("http", "https"))
-                .forCodeGeneration(true)
-                .select().paths(regex(".*foo.*"))
-                .build();
-    }
-
 
 }

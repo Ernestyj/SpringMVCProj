@@ -1,6 +1,8 @@
 package com.eugene.model;
 
 public class Admin {
+
+
     private Integer id;
 
     private String adminname;
