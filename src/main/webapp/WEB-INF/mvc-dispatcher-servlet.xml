@@ -39,9 +39,8 @@
     <!-- Enables swgger ui-->
     <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
     <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
-
     <!--静态资源配置-->
-    <!--<mvc:resources location="/scas-server/resources/" mapping="/resources/**" />-->
-    <!--<mvc:resources location="/WEB-INF/swaggerui/" mapping="/swagger/**"/>-->
+    <mvc:resources location="/static/resources/" mapping="/resources/**" />
+    <mvc:resources location="/static/" mapping="/static/**" />
 
 </beans>
